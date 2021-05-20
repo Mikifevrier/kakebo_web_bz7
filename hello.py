@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Hola, mundo!"
+    return "hola"
 
 @app.route("/adios")
 def bye():
-    return "Hasta luego, cocodrilo"
+    return "Hasta luego"
