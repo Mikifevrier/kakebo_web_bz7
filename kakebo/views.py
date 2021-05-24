@@ -1,6 +1,6 @@
 from kakebo import app
 import sqlite3
-from flask import jsonify
+from flask import jsonify, render_template
 
 @app.route("/")
 def index():
@@ -13,12 +13,23 @@ def index():
     filas = cur.fetchall()
     
     movimientos = []
+    saldo = 0
     for fila in filas:
         d = {}
         for tclave, valor in zip(claves, fila):
             d[tclave[0]] = valor
+        if d["esGasto"] == 0:
+            saldo = saldo + d["cantidad"]
+        else:
+            saldo = saldo - d["cantidad"]
+
+        d["saldo"] = saldo
         movimientos.append(d)
 
     conexion.close()
 
-    return jsonify(movimientos)
+    return render_template("movimientos.html", datos = movimientos) #observa el html de movimientos, cuando haces un for, hay que traerlo aquí
+
+@app.route("/nuevo", methods = ["GET", "POST"])
+def nuevo():
+    return render_template("alta.html")
