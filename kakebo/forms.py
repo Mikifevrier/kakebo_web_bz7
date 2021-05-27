@@ -10,8 +10,6 @@ def fecha_por_debajo_de_hoy(formulario, campo):
     if campo.data > hoy:
         raise ValidationError("La fecha no puede ser mayor que hoy")
 
-
-
 class MovimientosForm(FlaskForm):
     fecha = DateField("Fecha", validators=[DataRequired(message="Debe informar una fecha válida"), fecha_por_debajo_de_hoy])
     concepto = StringField("Concepto", validators=[DataRequired(), Length(min=10)])
