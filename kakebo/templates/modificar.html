@@ -1,54 +1,55 @@
-{%extends "base.html" %}
+{% extends 'base.html' %}
 
-{%block titulo%}Nuevo{%endblock%}
+{% block titulo %}Modificar{% endblock %}
 
-{%block contenido%}
-<h1>Nuevo Movimiento</h1>
-<form action="nuevo" method="post">
+{% block contenido %}
+<h1>Modificar movimiento  </h1>
+<form action="/modificar/{{ form.id.data }}" method="post">
     <fieldset class="container">
         {{ form.hidden_tag() }}
+
         <div>
             {{ form.fecha.label(class="mylabel") }}
             {{ form.fecha( type="date") }}
             {% for error in form.fecha.errors %}
                 <p class="msg-err">
-                    {{error}}
+                    {{ error }}
                 </p>
-            {%endfor%}
+            {% endfor %}
         </div>
-        <div>
+        <div >
             {{ form.concepto.label(class="mylabel") }}
-            {{ form.concepto() }}
+            {{ form.concepto(placeholder="Razón del gasto") }}
             {% for error in form.concepto.errors %}
                 <p class="msg-err">
-                    {{error}}
+                    {{ error }}
                 </p>
-            {%endfor%}
+            {% endfor %}
         </div>
-        <div>
+        <div >
             {{ form.categoria.label(class="mylabel") }}
             {{ form.categoria() }}
             {% for error in form.categoria.errors %}
                 <p class="msg-err">
-                    {{error}}
+                    {{ error }}
                 </p>
-            {%endfor%}
+            {% endfor %}
         </div>
-        <div>
+        <div >
             {{ form.cantidad.label(class="mylabel") }}
             {{ form.cantidad() }}
             {% for error in form.cantidad.errors %}
                 <p class="msg-err">
-                    {{error}}
+                    {{ error }}
                 </p>
-            {%endfor%}
+            {% endfor %}
         </div>
         <div >
             {{ form.esGasto.label(class="mylabel") }}
             {{ form.esGasto() }}
         </div>
     </fieldset>
-    {{ form.submit() }}
+    {{ form.submit()}}
 </form>
 
-{%endblock%}
+{% endblock %}
